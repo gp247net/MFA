@@ -71,7 +71,7 @@ composer require bacon/bacon-qr-code
 
 #### Setup MFA
 
-1. Go to MFA management page: `/mfa/setup?guard=customer`
+1. Go to MFA management page: `/mfa/setup/customer`
 2. Scan QR code with authenticator app (Google Authenticator, Authy, Microsoft Authenticator, etc.)
 3. Enter 6-digit code from app to verify
 4. Save recovery codes in a secure place
@@ -85,8 +85,8 @@ composer require bacon/bacon-qr-code
 
 #### Manage MFA
 
-- View MFA status: `/mfa/manage?guard=customer`
-- View recovery codes: `/mfa/recovery-codes?guard=customer`
+- View MFA status: `/mfa/manage/customer`
+- View recovery codes: `/mfa/recovery-codes/customer`
 - Regenerate recovery codes: From MFA management page
 - Disable MFA: From MFA management page (requires password confirmation)
 
@@ -403,24 +403,6 @@ mfa_set_verified();
 mfa_clear_verified();
 ```
 
-### Events
-
-The plugin doesn't emit custom events, but you can listen to Laravel events:
-
-```php
-// User logged in
-Event::listen('auth.login', function($guard, $user) {
-    if (mfa_is_user_enrolled($user, $guard)) {
-        // Redirect to MFA verification
-    }
-});
-
-// User logged out
-Event::listen('auth.logout', function($guard, $user) {
-    mfa_clear_verified();
-});
-```
-
 ## Directory Structure
 
 ```
@@ -507,45 +489,15 @@ The plugin supports all TOTP authenticator apps:
 3. Click "Reset MFA"
 4. User will need to setup MFA again
 
-## FAQ
-
-**Q: Is MFA mandatory?**
-A: No by default. Admins can enable "Forced" per guard to make it mandatory.
-
-**Q: What if I lose my authenticator device?**
-A: Use recovery codes that you saved previously to login.
-
-**Q: Can I use SMS instead of an app?**
-A: Currently the plugin only supports TOTP via authenticator apps.
-
-**Q: Does MFA affect performance?**
-A: No, MFA only checks on login, doesn't affect other requests.
-
-**Q: Can I customize the interface?**
-A: Yes, view templates can be customized in `Views/Frontend/`
-
-## Additional Documentation
-
-See more detailed documentation in the [`docs/`](docs/) folder:
-
-- **[INDEX.md](docs/INDEX.md)** - Complete documentation index
-- **[QUICKSTART.md](docs/QUICKSTART.md)** - Quick start in 5 minutes
-- **[INSTALLATION.md](docs/INSTALLATION.md)** - Detailed installation guide
-- **[USER_GUIDE_vi.md](docs/USER_GUIDE_vi.md)** - End user guide (Vietnamese)
-- **[USE_CASES.md](docs/USE_CASES.md)** - Real-world use cases
-- **[SUMMARY.md](docs/SUMMARY.md)** - Technical summary
-- **[BUILD_COMPLETE.md](docs/BUILD_COMPLETE.md)** - Build completion report
-- **[CHANGELOG.md](docs/CHANGELOG.md)** - Development history
-
 ## Support
 
 - Website: https://GP247.net
 - Email: support@gp247.net
-- Documentation: https://docs.gp247.net/plugins/mfa
+- Documentation: https://gp247.net/en/product/plugin-mfa.html
 
 ## License
 
-MIT License - See [docs/LICENSE](docs/LICENSE) for details
+MIT License
 
 ## Author
 

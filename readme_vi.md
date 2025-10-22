@@ -411,24 +411,6 @@ route('mfa.recovery_codes', 'customer')    // /mfa/recovery-codes/customer
 route('mfa.verify.show', 'customer')       // /mfa/verify/customer
 ```
 
-### Events
-
-Plugin không phát ra events riêng, nhưng bạn có thể listen các events của Laravel:
-
-```php
-// User logged in
-Event::listen('auth.login', function($guard, $user) {
-    if (mfa_is_user_enrolled($user, $guard)) {
-        // Redirect to MFA verification
-    }
-});
-
-// User logged out
-Event::listen('auth.logout', function($guard, $user) {
-    mfa_clear_verified();
-});
-```
-
 ## Cấu trúc thư mục
 
 ```
@@ -515,45 +497,15 @@ Plugin hỗ trợ tất cả các ứng dụng xác thực TOTP:
 3. Click "Reset MFA"
 4. Người dùng sẽ phải thiết lập MFA lại
 
-## Câu hỏi thường gặp
-
-**Q: MFA có bắt buộc không?**
-A: Mặc định không bắt buộc. Admin có thể bật "Forced" cho từng guard để bắt buộc.
-
-**Q: Mất thiết bị xác thực thì làm sao?**
-A: Sử dụng mã khôi phục đã lưu trước đó để đăng nhập.
-
-**Q: Có thể sử dụng SMS thay vì ứng dụng không?**
-A: Hiện tại plugin chỉ hỗ trợ TOTP qua ứng dụng xác thực.
-
-**Q: MFA có ảnh hưởng đến performance không?**
-A: Không, MFA chỉ kiểm tra khi đăng nhập, không ảnh hưởng đến các request khác.
-
-**Q: Có thể tùy chỉnh giao diện không?**
-A: Có, các view template có thể được tùy chỉnh trong `Views/Frontend/`
-
-## Tài liệu bổ sung
-
-Xem thêm các tài liệu chi tiết trong thư mục [`docs/`](docs/):
-
-- **[INDEX.md](docs/INDEX.md)** - Danh mục tài liệu đầy đủ
-- **[QUICKSTART.md](docs/QUICKSTART.md)** - Bắt đầu nhanh trong 5 phút
-- **[INSTALLATION.md](docs/INSTALLATION.md)** - Hướng dẫn cài đặt chi tiết
-- **[USER_GUIDE_vi.md](docs/USER_GUIDE_vi.md)** - Hướng dẫn người dùng
-- **[USE_CASES.md](docs/USE_CASES.md)** - Kịch bản sử dụng thực tế
-- **[SUMMARY.md](docs/SUMMARY.md)** - Tóm tắt technical
-- **[BUILD_COMPLETE.md](docs/BUILD_COMPLETE.md)** - Báo cáo hoàn thành
-- **[CHANGELOG.md](docs/CHANGELOG.md)** - Lịch sử phát triển
-
 ## Hỗ trợ
 
 - Website: https://GP247.net
 - Email: support@gp247.net
-- Documentation: https://docs.gp247.net/plugins/mfa
+- Documentation: https://gp247.net/vi/product/plugin-mfa.html
 
 ## Giấy phép
 
-MIT License - Xem chi tiết trong [docs/LICENSE](docs/LICENSE)
+MIT License
 
 ## Tác giả
 
