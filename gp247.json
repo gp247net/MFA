@@ -1,0 +1,15 @@
+{
+    "name": "MFA - Multi-Factor Authentication",
+    "image": "images/mfa.png",
+    "auth": "GP247",
+    "email": "support@gp247.net",
+    "link": "https://GP247.net",
+    "configGroup": "Plugins",
+    "configCode": "MFA",
+    "configKey": "MFA",
+    "version": "1.0",
+    "requireCore": ["1.2"],
+    "requirePackages": ["pragmarx/google2fa", "bacon/bacon-qr-code"],
+    "requireExtensions": []
+}
+
