@@ -47,23 +47,86 @@ composer require bacon/bacon-qr-code
 
 ### Step 2: Install the plugin
 
-1. Copy the plugin folder to `app/GP247/Plugins/MFA`
-2. Access Admin Panel > Extensions > Plugins
-3. Find "MFA" and click "Install"
-4. The plugin will automatically create database tables and default configurations
+There are 3 methods to install the plugin:
+
+#### Method 1: Install via Online Library
+
+1. Navigate to "Extensions" in the admin dashboard
+2. Select "Plugins"
+3. Choose the "Install from Library" tab
+4. Find "MFA" plugin and click "Install"
 5. Click "Enable" to activate the plugin
+
+#### Method 2: Import zip file
+
+1. Access Admin Panel > Extensions > Plugins
+2. Select the "Import file" tab
+3. Choose the MFA plugin zip file
+4. Complete the import process
+5. Click "Enable" to activate the plugin
+
+#### Method 3: Manual installation
+
+In case you encounter difficulties importing the zip file (e.g. upload errors, temporary file issues, etc.):
+
+1. Unzip and copy the source code folder to the corresponding directory:
+   ```
+   app/GP247/Plugins/MFA
+   ```
+
+2. Copy the `MFA/public` folder to the corresponding public path:
+   ```
+   public/GP247/Plugins/MFA
+   ```
+
+3. Access Admin Panel > Extensions > Plugins
+4. In the default "Local storage" tab, find "MFA" and click "Install"
+5. Click "Enable" to activate the plugin
+
+**Reference**: [Guide to Installing the Extension](https://gp247.net/en/docs/user-guide-extension/guide-to-installing-the-extension.html)
 
 ### Step 3: Configuration
 
-1. Access Admin Panel > Extensions > Plugins
-2. Click on "MFA" plugin to open configuration page
-3. Configure each guard:
-   - **Enabled**: Enable/disable MFA for the guard
-   - **Forced**: Force users to enable MFA
-   - **QR Code Size**: QR code size (100-500px)
-   - **Recovery Codes Count**: Number of recovery codes (4-20)
-   - **Window**: Time window allowance (0-5, recommended 1)
-4. Click "Save Settings"
+After successful installation, the MFA plugin will appear in the menu:
+**Admin Panel > System Configuration > Security > MFA**
+
+#### Configuration via config file
+
+To configure the plugin, edit the file: `app/GP247/Plugins/MFA/config.php`
+
+**Default**: The plugin is only enabled for the **admin** guard.
+
+Configuration parameters for each guard:
+
+- **enabled**: `1` = enabled, `0` = disabled MFA for the guard
+- **forced**: `1` = mandatory, `0` = optional (users can enable/disable MFA)
+- **model**: User model class
+- **qr_code_size**: QR code size (100-500px)
+- **recovery_codes_count**: Number of recovery codes (4-20)
+- **window**: Time window allowance (0-5, recommended 1)
+
+Example configuration:
+
+```php
+'guards' => [
+    'customer' => [
+        'enabled' => 0,  // Disable MFA for customer
+        'forced' => 0,
+        // ... other parameters
+    ],
+    'admin' => [
+        'enabled' => 1,  // Enable MFA for admin (default)
+        'forced' => 0,   // Not mandatory
+        // ... other parameters
+    ],
+],
+```
+
+**Note**: After editing the config file, clear the cache:
+```bash
+php artisan config:clear
+php artisan cache:clear
+```
 
 ## Usage
 

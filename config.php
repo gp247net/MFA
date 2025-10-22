@@ -7,7 +7,7 @@ return [
     // Guards configuration - support for multiple guards
     'guards' => [
         'customer' => [
-            'enabled' => 1,
+            'enabled' => 0,
             'forced' => 0,
             'model' => 'GP247\Shop\Models\ShopCustomer',
             'redirect_after_verify' => 'front.home',

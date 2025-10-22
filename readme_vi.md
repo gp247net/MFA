@@ -49,23 +49,86 @@ composer require bacon/bacon-qr-code
 
 ### Bước 2: Cài đặt plugin
 
-1. Copy thư mục plugin vào `app/GP247/Plugins/MFA`
-2. Truy cập Admin Panel > Extensions > Plugins
-3. Tìm "MFA" và click "Install"
-4. Plugin sẽ tự động tạo database tables và cấu hình mặc định
+Có 3 phương pháp cài đặt plugin:
+
+#### Phương pháp 1: Cài đặt từ thư viện trực tuyến
+
+1. Truy cập "Extensions" trong admin dashboard
+2. Chọn "Plugins"
+3. Chọn tab "Install from Library"
+4. Tìm plugin "MFA" và click "Install"
 5. Click "Enable" để kích hoạt plugin
+
+#### Phương pháp 2: Import file zip
+
+1. Truy cập Admin Panel > Extensions > Plugins
+2. Chọn tab "Import file"
+3. Chọn file zip của plugin MFA
+4. Hoàn tất quá trình import
+5. Click "Enable" để kích hoạt plugin
+
+#### Phương pháp 3: Cài đặt thủ công
+
+Trong trường hợp gặp khó khăn khi import file zip (lỗi upload, vấn đề về file tạm thời, v.v.):
+
+1. Giải nén và copy thư mục source code vào thư mục tương ứng:
+   ```
+   app/GP247/Plugins/MFA
+   ```
+
+2. Copy thư mục `MFA/public` vào đường dẫn public tương ứng:
+   ```
+   public/GP247/Plugins/MFA
+   ```
+
+3. Truy cập Admin Panel > Extensions > Plugins
+4. Trong tab "Local storage" mặc định, tìm "MFA" và click "Install"
+5. Click "Enable" để kích hoạt plugin
+
+**Tham khảo**: [Hướng dẫn cài đặt Extension](https://gp247.net/vi/docs/user-guide-extension/guide-to-installing-the-extension.html)
 
 ### Bước 3: Cấu hình
 
-1. Truy cập Admin Panel > Extensions > Plugins
-2. Click vào plugin "MFA" để mở trang cấu hình
-3. Cấu hình cho từng guard:
-   - **Enabled**: Bật/tắt MFA cho guard
-   - **Forced**: Bắt buộc người dùng phải bật MFA
-   - **QR Code Size**: Kích thước mã QR (100-500px)
-   - **Recovery Codes Count**: Số lượng mã khôi phục (4-20)
-   - **Window**: Cửa sổ thời gian cho phép (0-5, khuyến nghị 1)
-4. Click "Save Settings" để lưu
+Sau khi cài đặt thành công, plugin MFA sẽ xuất hiện trong menu:
+**Admin Panel > Cấu hình hệ thống > Bảo mật > MFA**
+
+#### Cấu hình qua file config
+
+Để cấu hình plugin, chỉnh sửa file: `app/GP247/Plugins/MFA/config.php`
+
+**Mặc định**: Plugin chỉ được kích hoạt cho guard **admin**.
+
+Các tham số cấu hình cho mỗi guard:
+
+- **enabled**: `1` = bật, `0` = tắt MFA cho guard
+- **forced**: `1` = bắt buộc, `0` = tùy chọn (người dùng có thể bật/tắt MFA)
+- **model**: Model class của user
+- **qr_code_size**: Kích thước mã QR (100-500px)
+- **recovery_codes_count**: Số lượng mã khôi phục (4-20)
+- **window**: Cửa sổ thời gian cho phép (0-5, khuyến nghị 1)
+
+Ví dụ cấu hình:
+
+```php
+'guards' => [
+    'customer' => [
+        'enabled' => 0,  // Tắt MFA cho customer
+        'forced' => 0,
+        // ... các tham số khác
+    ],
+    'admin' => [
+        'enabled' => 1,  // Bật MFA cho admin (mặc định)
+        'forced' => 0,   // Không bắt buộc
+        // ... các tham số khác
+    ],
+],
+```
+
+**Lưu ý**: Sau khi chỉnh sửa file config, cần clear cache:
+```bash
+php artisan config:clear
+php artisan cache:clear
+```
 
 ## Sử dụng
 
