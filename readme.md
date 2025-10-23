@@ -7,7 +7,7 @@ The MFA Plugin provides Two-Factor Authentication for GP247 system, enhancing us
 <p align="center">
   <img src="https://static.gp247.net/product/mfa-user.jpg" alt="GP247 User Interface - Register/Manage MFA" />
   <img src="https://static.gp247.net/product/mfa-admin.jpg" alt="GP247 Admin Interface - Setup/Manage MFA" />
-  <img src="https://static.gp247.net/product/mfa-process.jpg" alt="Multi-Factor Authentication Process on GP247" />
+  <img src="https://static.gp247.net/product/mfa-code.jpg" alt="Multi-Factor Authentication Process on GP247" />
 </p>
 
 

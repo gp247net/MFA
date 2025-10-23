@@ -9,7 +9,7 @@ Plugin MFA cung cấp xác thực 2 lớp (Two-Factor Authentication) cho hệ t
 <p align="center">
   <img src="https://static.gp247.net/product/mfa-user.jpg" alt="Giao diện người dùng GP247 - Đăng ký/Quản lý MFA" />
   <img src="https://static.gp247.net/product/mfa-admin.jpg" alt="Giao diện quản trị viên GP247 - Cài đặt/Quản lý MFA" />
-  <img src="https://static.gp247.net/product/mfa-process.jpg" alt="Quy trình xác thực Multi-Factor Authentication trên GP247"/>
+  <img src="https://static.gp247.net/product/mfa-code.jpg" alt="Quy trình xác thực Multi-Factor Authentication trên GP247"/>
 </p>
 
 
